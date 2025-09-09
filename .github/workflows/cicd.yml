@@ -40,6 +40,10 @@ jobs:
           generateReleaseNotes: true
           tag: ${{ github.ref_name }}
           artifacts: ${{ steps.build.outputs.archive_directory }}/**/*.zip
+          allowUpdates: true
+  
+      - name: Make get_butler.sh executable
+        run: chmod +x ./get_butler.sh  
 
       - name: Deploy to itch.io
         run: |
@@ -53,4 +57,4 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_RELEASE_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: '${{ vars.GAME_NAME }} ${{ github.ref_name }} released: https://${{ vars.ITCHIO_USERNAME }}.itch.io/${{ vars.ITCHIO_GAME }} Password: ${{ secrets.ITCHIO_PAGE_PASS }}'
+          args: '${{ vars.GAME_NAME }} ${{ github.ref_name }} released: https://${{ vars.ITCHIO_USERNAME }}.itch.io/${{ vars.ITCHIO_GAME }} Password: 100devs'
